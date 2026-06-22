@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 850" font-family="'Segoe UI','Cascadia Code',monospace">
+  <defs>
+    <style>
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes typeWriter { from { width: 0; } to { width: 100%; } }
+      @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+      @keyframes logLine { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+      @keyframes checkmark { from { stroke-dashoffset: 50; } to { stroke-dashoffset: 0; } }
+      @keyframes cardAppear { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+      @keyframes pctReveal { from { opacity: 0; } 85% { opacity: 0; } to { opacity: 1; } }
+      .window { animation: fadeIn 0.6s ease-out; }
+      .titlebar { animation: slideDown 0.4s ease-out; }
+      .card-conn { animation: slideUp 0.5s ease-out 0.3s both; }
+      .card-version { animation: cardAppear 0.5s ease-out 3.5s both; }
+      .card-terminal { animation: slideUp 0.5s ease-out 0.8s both; }
+      .card-download { animation: cardAppear 0.5s ease-out 4.5s both; }
+      .card-progress { animation: slideUp 0.5s ease-out 5.5s both; }
+      .card-bottom { animation: slideUp 0.5s ease-out 5.0s both; }
+      .pct-anim { animation: pctReveal 8s ease-out both; }
+      .cursor-blink { animation: blink 0.8s step-end infinite; }
+      .typing-text { overflow: hidden; white-space: nowrap; display: inline-block; animation: typeWriter 0.8s steps(20) forwards; width: 0; }
+      .log-l1 { animation: logLine 0.3s ease-out 1.5s both; }
+      .log-l2 { animation: logLine 0.3s ease-out 2.0s both; }
+      .log-l3 { animation: logLine 0.3s ease-out 2.5s both; }
+      .log-l4 { animation: logLine 0.3s ease-out 3.0s both; }
+      .log-l5 { animation: logLine 0.3s ease-out 3.5s both; }
+      .log-l6 { animation: logLine 0.3s ease-out 4.0s both; }
+      .log-l7 { animation: logLine 0.3s ease-out 4.5s both; }
+      .checkmark-path { stroke-dasharray: 50; animation: checkmark 0.5s ease-out 3.5s both; }
+    </style>
+  </defs>
+
+  <rect x="1" y="1" width="798" height="848" rx="8" fill="#000" opacity="0.4"/>
+  <rect x="0" y="0" width="800" height="850" rx="8" fill="#0A0E14" class="window"/>
+
+  <rect x="0" y="0" width="800" height="36" rx="8" fill="#060A10" class="titlebar"/>
+  <rect x="0" y="28" width="800" height="8" fill="#060A10"/>
+  <text x="16" y="23" fill="#E8ECF1" font-size="13" font-weight="600">⚡ ECO Downloader</text>
+
+  <rect x="744" y="8" width="20" height="20" rx="4" fill="transparent" stroke="#1E293B" stroke-width="1"/>
+  <text x="748" y="22" fill="#7A8599" font-size="12">─</text>
+  <rect x="768" y="8" width="20" height="20" rx="4" fill="transparent" stroke="#1E293B" stroke-width="1"/>
+  <text x="773" y="22" fill="#7A8599" font-size="12">✕</text>
+
+  <g transform="translate(20, 50)">
+
+    <!-- ─── Connection Card ─── -->
+    <g class="card-conn">
+      <rect x="0" y="0" width="760" height="304" rx="10" fill="#131A24" stroke="#1E293B" stroke-width="1"/>
+      <text x="16" y="24" fill="#7A8599" font-size="12" font-weight="bold">🔌  Conexão com Firebird</text>
+
+      <!-- Pasta -->
+      <text x="16" y="54" fill="#E8ECF1" font-size="11">Pasta:</text>
+      <rect x="62" y="40" width="580" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <text x="70" y="57" fill="#E8ECF1" font-size="12">C:\Ecosis\windows</text>
+      <rect x="650" y="40" width="36" height="26" rx="6" fill="transparent" stroke="#1E293B" stroke-width="1"/>
+      <text x="658" y="57" fill="#00B4D8" font-size="12">📂</text>
+
+      <!-- Exe -->
+      <text x="16" y="86" fill="#E8ECF1" font-size="11">Exe:</text>
+      <rect x="62" y="72" width="624" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <text x="70" y="89" fill="#E8ECF1" font-size="12">eco.exe</text>
+      <text x="678" y="89" fill="#7A8599" font-size="10">▼</text>
+
+      <!-- INI -->
+      <text x="16" y="118" fill="#E8ECF1" font-size="11">INI:</text>
+      <rect x="62" y="104" width="624" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <text x="70" y="121" fill="#E8ECF1" font-size="12">eco.ini</text>
+      <text x="678" y="121" fill="#7A8599" font-size="10">▼</text>
+
+      <!-- Server / Database -->
+      <text x="16" y="150" fill="#E8ECF1" font-size="11">Servidor:</text>
+      <rect x="72" y="136" width="180" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <text x="80" y="153" fill="#E8ECF1" font-size="12">127.0.0.1/3050</text>
+      <text x="268" y="150" fill="#E8ECF1" font-size="11">Banco:</text>
+      <rect x="312" y="136" width="374" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <text x="320" y="153" fill="#E8ECF1" font-size="12">\ecosis\dados\ECODADOS_RESTAURADA.ECO</text>
+
+      <!-- DB User / DB Senha -->
+      <text x="16" y="186" fill="#E8ECF1" font-size="11">DB User:</text>
+      <rect x="72" y="172" width="155" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <text x="80" y="189" fill="#E8ECF1" font-size="12">SYSDBA</text>
+      <text x="244" y="186" fill="#E8ECF1" font-size="11">DB Senha:</text>
+      <rect x="312" y="172" width="155" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <circle cx="322" cy="187" r="3" fill="#E8ECF1" opacity="0.6"/>
+      <circle cx="332" cy="187" r="3" fill="#E8ECF1" opacity="0.6"/>
+      <circle cx="342" cy="187" r="3" fill="#E8ECF1" opacity="0.6"/>
+
+      <!-- Help text -->
+      <text x="16" y="216" fill="#7A8599" font-size="9">Formato: servidor:porta ou servidor/porta (ex: 127.0.0.1/3050)  |  Database: caminho completo</text>
+
+      <!-- Web Credentials -->
+      <text x="16" y="242" fill="#E8ECF1" font-size="11">Usuário:</text>
+      <rect x="68" y="228" width="155" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <clipPath id="userClip"><rect x="76" y="228" width="140" height="24"/></clipPath>
+      <text clip-path="url(#userClip)" x="76" y="246" fill="#E8ECF1" font-size="12" class="typing-text" style="animation-delay: 0.5s;">admin</text>
+      <text x="109" y="246" fill="#00B4D8" font-size="12" class="cursor-blink" style="animation-delay: 1.2s;">|</text>
+
+      <text x="244" y="242" fill="#E8ECF1" font-size="11">Senha:</text>
+      <rect x="286" y="228" width="155" height="26" rx="4" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <circle cx="296" cy="243" r="3" fill="#E8ECF1" opacity="0.6"/>
+      <circle cx="306" cy="243" r="3" fill="#E8ECF1" opacity="0.6"/>
+      <circle cx="316" cy="243" r="3" fill="#E8ECF1" opacity="0.6"/>
+      <circle cx="326" cy="243" r="3" fill="#E8ECF1" opacity="0.6"/>
+
+      <rect x="456" y="228" width="36" height="26" rx="6" fill="transparent" stroke="#1E293B" stroke-width="1"/>
+      <text x="462" y="246" fill="#00B4D8" font-size="12">💾</text>
+
+      <!-- Status + Buttons (dentro do card agora) -->
+      <text x="16" y="280" fill="#7A8599" font-size="11">✔ Conectado — v8.3.0 (Build #489)</text>
+      <rect x="506" y="266" width="130" height="30" rx="6" fill="transparent" stroke="#1E293B" stroke-width="1"/>
+      <text x="516" y="286" fill="#00B4D8" font-size="12">⚡  Auto (C:\Ecosis)</text>
+      <rect x="646" y="266" width="104" height="30" rx="8" fill="#00B4D8"/>
+      <text x="662" y="286" fill="#FFF" font-size="12" font-weight="bold">🔍  Detectar</text>
+    </g>
+
+    <!-- ─── Version Card ─── -->
+    <g class="card-version">
+      <rect x="0" y="320" width="760" height="62" rx="10" fill="#131A24" stroke="#1E293B" stroke-width="1"/>
+      <text x="18" y="350" fill="#E8ECF1" font-size="18" font-weight="bold">🚀 ECO 8.3.0</text>
+      <text x="18" y="370" fill="#7A8599" font-size="13">✅ Liberado  ·  12/06/2026</text>
+      <circle cx="730" cy="350" r="16" fill="none" stroke="#00E676" stroke-width="2"/>
+      <path d="M722 350 l6 6 l12 -12" fill="none" stroke="#00E676" stroke-width="2" class="checkmark-path"/>
+    </g>
+
+    <!-- ─── Terminal ─── -->
+    <g class="card-terminal">
+      <rect x="0" y="398" width="760" height="150" rx="10" fill="#060A0E" stroke="#1E293B" stroke-width="1"/>
+      <rect x="0" y="398" width="760" height="28" rx="10" fill="#131A24" stroke="#1E293B" stroke-width="1"/>
+      <rect x="0" y="416" width="760" height="10" fill="#131A24"/>
+      <text x="14" y="417" fill="#7A8599" font-size="10" font-weight="bold">💻 TERMINAL</text>
+
+      <clipPath id="termClip"><rect x="0" y="426" width="760" height="122"/></clipPath>
+      <g clip-path="url(#termClip)">
+        <g class="log-l1"><text x="14" y="441" fill="#7A8599" font-size="11" font-family="'Cascadia Code',monospace">&gt; Detectando via C:\Ecosis...</text></g>
+        <g class="log-l2"><text x="14" y="458" fill="#00E676" font-size="11" font-family="'Cascadia Code',monospace">✔ Conectado — v8.3.0 (Build #489)</text></g>
+        <g class="log-l3"><text x="14" y="475" fill="#7A8599" font-size="11" font-family="'Cascadia Code',monospace">&gt; Conectando ao servidor WebLiberações...</text></g>
+        <g class="log-l4"><text x="14" y="492" fill="#00E676" font-size="11" font-family="'Cascadia Code',monospace">✔ Login autorizado com sucesso!</text></g>
+        <g class="log-l5"><text x="14" y="509" fill="#7A8599" font-size="11" font-family="'Cascadia Code',monospace">&gt; Obtendo versões disponíveis...</text></g>
+        <g class="log-l6"><text x="14" y="526" fill="#00E676" font-size="11" font-family="'Cascadia Code',monospace">✔ ECO 8.3.0 — 3 grupo(s) disponíveis</text></g>
+        <g class="log-l7"><text x="14" y="543" fill="#7A8599" font-size="11" font-family="'Cascadia Code',monospace">✔ Pronto! Escolha o tipo de download acima.</text></g>
+      </g>
+    </g>
+
+    <!-- ─── Download Cards ─── -->
+    <g class="card-download">
+      <rect x="0" y="564" width="372" height="112" rx="10" fill="#131A24" stroke="#1E293B" stroke-width="1"/>
+      <text x="16" y="586" fill="#E8ECF1" font-size="15" font-weight="bold">eco.zip</text>
+      <text x="16" y="606" fill="#7A8599" font-size="12">Executável portátil</text>
+      <text x="16" y="622" fill="#7A8599" font-size="10">Pronto para uso, sem instalação</text>
+      <rect x="16" y="632" width="100" height="34" rx="8" fill="#00B4D8"/>
+      <text x="32" y="653" fill="#FFF" font-size="12" font-weight="bold">⬇  Baixar</text>
+
+      <rect x="388" y="564" width="372" height="112" rx="10" fill="#131A24" stroke="#1E293B" stroke-width="1"/>
+      <text x="404" y="586" fill="#E8ECF1" font-size="15" font-weight="bold">EcoSetup.zip</text>
+      <text x="404" y="606" fill="#7A8599" font-size="12">Instalador completo</text>
+      <text x="404" y="622" fill="#7A8599" font-size="10">Instalação guiada com configurações</text>
+      <rect x="404" y="632" width="100" height="34" rx="8" fill="#00B4D8"/>
+      <text x="420" y="653" fill="#FFF" font-size="12" font-weight="bold">⬇  Baixar</text>
+    </g>
+
+    <!-- ─── Progress Panel ─── -->
+    <g class="card-progress">
+      <rect x="0" y="692" width="760" height="50" rx="10" fill="#131A24" stroke="#1E293B" stroke-width="1"/>
+      <text x="14" y="712" fill="#7A8599" font-size="11">⬇ Baixando eco.zip...</text>
+      <rect x="14" y="722" width="680" height="8" rx="4" fill="#1E293B"/>
+      <rect x="14" y="722" height="8" rx="4" fill="#00B4D8">
+        <animate attributeName="width" from="0" to="680" dur="3s" begin="6s" fill="freeze"/>
+      </rect>
+      <text x="710" y="730" fill="#00B4D8" font-size="11" font-weight="bold" class="pct-anim">100%</text>
+    </g>
+
+    <!-- ─── Bottom Bar ─── -->
+    <g class="card-bottom">
+      <rect x="0" y="758" width="760" height="42" rx="10" fill="#131A24" stroke="#1E293B" stroke-width="1"/>
+      <text x="16" y="784" fill="#7A8599" font-size="12">📂 C:\Users\Desktop\ECO_v8.3.0</text>
+      <rect x="614" y="764" width="136" height="30" rx="8" fill="#00B4D8"/>
+      <text x="632" y="785" fill="#FFF" font-size="12" font-weight="bold">⬇  Baixar ambos</text>
+    </g>
+
+  </g>
+</svg>

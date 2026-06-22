@@ -1,0 +1,565 @@
+<Window x:Class="ECODownloader.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ECO Downloader"
+        MinWidth="520" MinHeight="620"
+        Width="580" Height="680"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="{DynamicResource BgBrush}"
+        FontFamily="Segoe UI"
+        WindowStartupLocation="CenterScreen"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
+        x:Name="ThisWindow">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="34" CornerRadius="0"
+                      GlassFrameThickness="0"
+                      ResizeBorderThickness="4"
+                      UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <Border Background="{DynamicResource BgBrush}"
+            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="34"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- ═══ Title Bar ═══ -->
+            <Grid Grid.Row="0" Background="{DynamicResource TitleBgBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="⚡ ECO Downloader"
+                           Foreground="{DynamicResource TextBrush}"
+                           FontSize="13" FontWeight="SemiBold"
+                           VerticalAlignment="Center" Margin="16,0,0,0"
+                           MouseLeftButtonDown="TitleBar_MouseDown"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal"
+                            Background="Transparent"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button x:Name="BtnMinimize"
+                            Style="{DynamicResource TitleBtn}"
+                            Content="─"
+                            Click="BtnMinimize_Click"
+                            WindowChrome.IsHitTestVisibleInChrome="True"/>
+                    <Button x:Name="BtnClose"
+                            Style="{DynamicResource CloseBtn}"
+                            Content="✕"
+                            Click="BtnClose_Click"
+                            WindowChrome.IsHitTestVisibleInChrome="True"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- ═══ Content (no scrollbar) ═══ -->
+            <ScrollViewer Grid.Row="1" Padding="20,12,20,12"
+                          BorderThickness="0"
+                          Background="Transparent"
+                          VerticalScrollBarVisibility="Hidden"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+
+                    <!-- ─── Connection Settings ─── -->
+                    <Border Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1" CornerRadius="10"
+                            Padding="16,12" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="🔌  Conexão com Firebird"
+                                       FontSize="12" FontWeight="Bold"
+                                       Foreground="{DynamicResource TextSecBrush}"
+                                       Margin="0,0,0,10"/>
+
+                            <!-- Folder + Exe + INI -->
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                           Text="Pasta:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,0,6,0"/>
+
+                                <TextBox x:Name="TxtExeFolder"
+                                         Grid.Row="0" Grid.Column="1"
+                                         Text="C:\Ecosis\windows"
+                                         Background="{DynamicResource LogBgBrush}"
+                                         Foreground="{DynamicResource TextBrush}"
+                                         BorderBrush="{DynamicResource BorderBrush}"
+                                         BorderThickness="1"
+                                         FontSize="12" Padding="6,4"/>
+
+                                <Button x:Name="BtnBrowseFolder"
+                                        Grid.Row="0" Grid.Column="2"
+                                        Content="📂"
+                                        Style="{DynamicResource OutlineBtn}"
+                                        Width="36" Height="28"
+                                        Margin="6,0,0,0"
+                                        ToolTip="Selecionar pasta com executáveis"
+                                        Click="BtnBrowseFolder_Click"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                           Text="Exe:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,6,6,0"/>
+
+                                <ComboBox x:Name="CmbExe"
+                                          Grid.Row="1" Grid.Column="1"
+                                          Background="{DynamicResource LogBgBrush}"
+                                          Foreground="{DynamicResource TextBrush}"
+                                          BorderBrush="{DynamicResource BorderBrush}"
+                                          FontSize="12" Padding="4,2"
+                                          Margin="0,6,0,0"
+                                          MinHeight="26"
+                                          SelectionChanged="CmbExe_SelectionChanged"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0"
+                                           Text="INI:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,6,6,0"/>
+
+                                <ComboBox x:Name="CmbIni"
+                                          Grid.Row="2" Grid.Column="1"
+                                          Grid.ColumnSpan="2"
+                                          Background="{DynamicResource LogBgBrush}"
+                                          Foreground="{DynamicResource TextBrush}"
+                                          BorderBrush="{DynamicResource BorderBrush}"
+                                          FontSize="12" Padding="4,2"
+                                          Margin="0,6,0,0"
+                                          MinHeight="26"
+                                          SelectionChanged="CmbIni_SelectionChanged"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                           Text="Servidor:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,0,8,0"/>
+
+                                <TextBox x:Name="TxtServer"
+                                         Grid.Row="0" Grid.Column="1"
+                                         Text="127.0.0.1/3050"
+                                         Background="{DynamicResource LogBgBrush}"
+                                         Foreground="{DynamicResource TextBrush}"
+                                         BorderBrush="{DynamicResource BorderBrush}"
+                                         BorderThickness="1"
+                                         FontSize="12" Padding="6,4"
+                                         Margin="0,0,12,0"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="2"
+                                           Text="Banco:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,0,8,0"/>
+
+                                <TextBox x:Name="TxtDatabase"
+                                         Grid.Row="0" Grid.Column="3"
+                                         Text="\ecosis\dados\ECODADOS_RESTAURADA.ECO"
+                                         Background="{DynamicResource LogBgBrush}"
+                                         Foreground="{DynamicResource TextBrush}"
+                                         BorderBrush="{DynamicResource BorderBrush}"
+                                         BorderThickness="1"
+                                         FontSize="12" Padding="6,4"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                           Text="DB User:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,6,8,0"/>
+
+                                <TextBox x:Name="TxtDbUser"
+                                         Grid.Row="1" Grid.Column="1"
+                                         Text="SYSDBA"
+                                         Background="{DynamicResource LogBgBrush}"
+                                         Foreground="{DynamicResource TextBrush}"
+                                         BorderBrush="{DynamicResource BorderBrush}"
+                                         BorderThickness="1"
+                                         FontSize="12" Padding="6,4"
+                                         Margin="0,6,12,0"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="2"
+                                           Text="DB Senha:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,6,8,0"/>
+
+                                <PasswordBox x:Name="TxtDbPassword"
+                                             Grid.Row="1" Grid.Column="3"
+                                             Password="masterkey"
+                                             Background="{DynamicResource LogBgBrush}"
+                                             Foreground="{DynamicResource TextBrush}"
+                                             BorderBrush="{DynamicResource BorderBrush}"
+                                             BorderThickness="1"
+                                             FontSize="12" Padding="6,4"
+                                             Margin="0,6,0,0"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+                                           Text="Formato: servidor:porta ou servidor/porta (ex: 127.0.0.1/3050)  |  Database: caminho completo"
+                                           Foreground="{DynamicResource TextSecBrush}"
+                                           FontSize="9" Margin="0,4,0,0"/>
+                            </Grid>
+
+                            <!-- Credentials row -->
+                            <Grid Margin="0,6,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="Usuário:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,0,6,0"/>
+
+                                <TextBox x:Name="TxtUsuario"
+                                         Grid.Column="1"
+                                         Background="{DynamicResource LogBgBrush}"
+                                         Foreground="{DynamicResource TextBrush}"
+                                         BorderBrush="{DynamicResource BorderBrush}"
+                                         BorderThickness="1"
+                                         FontSize="12" Padding="6,4"/>
+
+                                <TextBlock Grid.Column="3"
+                                           Text="Senha:"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           FontSize="11" VerticalAlignment="Center"
+                                           Margin="0,0,6,0"/>
+
+                                <PasswordBox x:Name="TxtSenha"
+                                             Grid.Column="4"
+                                             Background="{DynamicResource LogBgBrush}"
+                                             Foreground="{DynamicResource TextBrush}"
+                                             BorderBrush="{DynamicResource BorderBrush}"
+                                             BorderThickness="1"
+                                             FontSize="12" Padding="6,4"/>
+
+                                <Button Grid.Column="5"
+                                        x:Name="BtnSalvarCred"
+                                        Content="💾"
+                                        Style="{DynamicResource OutlineBtn}"
+                                        Width="36" Height="28"
+                                        Margin="6,0,0,0"
+                                        ToolTip="Salvar credenciais"
+                                        Click="BtnSalvarCred_Click"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           x:Name="TxtDbStatus"
+                                           Foreground="{DynamicResource TextSecBrush}"
+                                           FontSize="11"
+                                           VerticalAlignment="Center"/>
+
+                                <Button Grid.Column="1"
+                                        x:Name="BtnAutoDetect"
+                                        Content="⚡  Auto (C:\Ecosis)"
+                                        Style="{DynamicResource OutlineBtn}"
+                                        Height="32"
+                                        Click="BtnAutoDetect_Click"/>
+
+                                <Button Grid.Column="3"
+                                        x:Name="BtnDetect"
+                                        Content="🔍  Detectar"
+                                        Style="{DynamicResource DownloadBtn}"
+                                        Height="32"
+                                        Width="110"
+                                        Click="BtnDetect_Click"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- ─── Version Card ─── -->
+                    <Border Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1" CornerRadius="10"
+                            Padding="18,14" Margin="0,0,0,12"
+                            x:Name="VersionCard">
+                        <StackPanel>
+                            <TextBlock x:Name="TxtVersion"
+                                       FontSize="18" FontWeight="Bold"
+                                       Foreground="{DynamicResource TextBrush}"/>
+                            <TextBlock x:Name="TxtStatus"
+                                       FontSize="13" Margin="0,6,0,0"
+                                       Foreground="{DynamicResource TextSecBrush}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- ─── Log Terminal ─── -->
+                    <Border Background="{DynamicResource LogBgBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1" CornerRadius="10"
+                            Padding="0" Margin="0,0,0,12"
+                            Height="150">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0"
+                                    Background="{DynamicResource CardBrush}"
+                                    BorderBrush="{DynamicResource BorderBrush}"
+                                    BorderThickness="0,0,0,1"
+                                    CornerRadius="10,10,0,0"
+                                    Padding="14,6">
+                                <TextBlock Text="💻 TERMINAL"
+                                           Foreground="{DynamicResource TextSecBrush}"
+                                           FontSize="10" FontWeight="Bold"
+                                           VerticalAlignment="Center"/>
+                            </Border>
+
+                            <ListBox x:Name="LogList"
+                                     Grid.Row="1"
+                                     Style="{DynamicResource LogListBox}"
+                                     Margin="0"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Text}"
+                                                   Foreground="{Binding Foreground}"
+                                                   FontFamily="Cascadia Code"
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap"
+                                                   Margin="12,1,12,1"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </Border>
+
+                    <!-- ─── Version Picker ─── -->
+                    <Border x:Name="VersionPicker"
+                            Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1" CornerRadius="10"
+                            Padding="14" Margin="0,0,0,12"
+                            Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="Selecione a versão:"
+                                       Foreground="{DynamicResource TextSecBrush}"
+                                       FontSize="12" Margin="0,0,0,8"/>
+                            <ListBox x:Name="VersionList"
+                                     Background="{DynamicResource LogBgBrush}"
+                                     BorderBrush="{DynamicResource BorderBrush}"
+                                     BorderThickness="1"
+                                     FontSize="13"
+                                     Foreground="{DynamicResource TextBrush}"
+                                     MinHeight="80" MaxHeight="140"
+                                     SelectionChanged="VersionList_SelectionChanged">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListBoxItem">
+                                                    <Border Background="{TemplateBinding Background}"
+                                                            Padding="6,3">
+                                                        <ContentPresenter/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Display}"
+                                                   Foreground="{DynamicResource TextBrush}"
+                                                   Padding="8,4"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- ─── Download Cards ─── -->
+                    <Grid x:Name="DownloadArea" Margin="0,0,0,12" Visibility="Collapsed"
+                          Height="124">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                                Background="{DynamicResource CardBrush}"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1" CornerRadius="10"
+                                Padding="16,14">
+                            <StackPanel>
+                                <TextBlock Text="eco.zip" FontSize="15" FontWeight="Bold"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock Text="Executável portátil"
+                                           FontSize="12" Margin="0,4,0,0"
+                                           Foreground="{DynamicResource TextSecBrush}"/>
+                                <TextBlock Text="Pronto para uso, sem instalação"
+                                           FontSize="10" Margin="0,2,0,6"
+                                           Foreground="{DynamicResource TextSecBrush}"/>
+                                <Button x:Name="BtnDownloadExe"
+                                        Content="⬇  Baixar"
+                                        Style="{DynamicResource DownloadBtn}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2"
+                                Background="{DynamicResource CardBrush}"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1" CornerRadius="10"
+                                Padding="16,14">
+                            <StackPanel>
+                                <TextBlock x:Name="TxtSetupTitle" Text="EcoSetup.zip"
+                                           FontSize="15" FontWeight="Bold"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock Text="Instalador completo"
+                                           FontSize="12" Margin="0,4,0,0"
+                                           Foreground="{DynamicResource TextSecBrush}"/>
+                                <TextBlock Text="Instalação guiada com configurações"
+                                           FontSize="10" Margin="0,2,0,6"
+                                           Foreground="{DynamicResource TextSecBrush}"/>
+                                <Button x:Name="BtnDownloadSetup"
+                                        Content="⬇  Baixar"
+                                        Style="{DynamicResource DownloadBtn}"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- ─── Progress Bar ─── -->
+                    <Border x:Name="ProgressPanel"
+                            Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1" CornerRadius="10"
+                            Padding="14,10" Margin="0,0,0,12"
+                            Visibility="Collapsed">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="TxtProgressLabel"
+                                       Grid.Row="0" Grid.ColumnSpan="2"
+                                       Foreground="{DynamicResource TextSecBrush}"
+                                       FontSize="11" Margin="0,0,0,4"/>
+                            <ProgressBar x:Name="ProgressBar"
+                                         Grid.Row="1" Grid.Column="0"
+                                         Height="6"
+                                         Minimum="0" Maximum="100"
+                                         Foreground="{DynamicResource AccentBrush}"
+                                         Background="{DynamicResource BorderBrush}"
+                                         BorderThickness="0"/>
+                            <TextBlock x:Name="TxtProgressPct"
+                                       Grid.Row="1" Grid.Column="1"
+                                       Foreground="{DynamicResource AccentBrush}"
+                                       FontSize="11" FontWeight="Bold"
+                                       Margin="10,0,0,0"
+                                       Text="0%"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- ─── Bottom Bar ─── -->
+                    <Border x:Name="BottomBar"
+                            Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1" CornerRadius="10"
+                            Padding="14,10" Margin="0,0,0,12"
+                            Visibility="Collapsed">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="TxtDestino"
+                                       Foreground="{DynamicResource TextSecBrush}"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <Button Grid.Column="1"
+                                    x:Name="BtnDownloadBoth"
+                                    Content="⬇  Baixar ambos"
+                                    Style="{DynamicResource DownloadBtn}"
+                                    Height="34"
+                                    Padding="14,0"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- ─── Footer / Theme Toggle ─── -->
+                    <Grid Margin="0,4,0,0" Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                x:Name="BtnTheme"
+                                Style="{DynamicResource OutlineBtn}"
+                                Click="BtnTheme_Click"/>
+
+                        <TextBlock Grid.Column="2"
+                                   Text="v1.3"
+                                   Foreground="{DynamicResource TextSecBrush}"
+                                   FontSize="11"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>

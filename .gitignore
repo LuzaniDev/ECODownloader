@@ -1,0 +1,26 @@
+# IDE
+.vs/
+*.suo
+*.sln.docstates
+*.user
+*.userosscache
+*.userprefs
+.DS_Store
+
+# Build
+bin/
+obj/
+publish/
+*.nupkg
+packages/
+
+# Config (contains encrypted credentials via DPAPI)
+config.json
+
+# Runtime
+*.log
+*.tmp
+
+# Playwright
+.playwright-mcp/
+
